@@ -1,42 +1,24 @@
-<script setup>
-import Topbar from "~/components/topbar.vue";
-
-// layout mặc định cho mọi trang
-</script>
-
 <template>
-  <div class="layout">
-    <main class="page-body">
-      <Topbar />
+  <div class="min-h-screen flex flex-col bg-background text-surface-content font-sans selection:bg-primary selection:text-white">
+    
+    <topbar/>
 
+    <main class="flex-grow pt-16">
       <slot />
-      <!-- Nội dung từng page sẽ render tại đây -->
     </main>
+
+    <footer class="bg-background-soft py-12 border-t border-border text-center relative z-10">
+      <div class="container mx-auto px-6">
+        <h3 class="text-2xl font-bold text-white mb-6">Sẵn sàng hợp tác?</h3>
+        
+        <NuxtLink to="/contact" class="inline-block px-8 py-3 bg-white text-black font-bold rounded-full hover:bg-primary hover:text-white transition-all duration-300 shadow-lg hover:shadow-primary/50 hover:-translate-y-1">
+          Liên hệ với tôi
+        </NuxtLink>
+        
+        <p class="text-surface-muted text-sm mt-10">
+          © 2024 DevProfile. Designed & Built with <span class="text-primary">Passion</span>.
+        </p>
+      </div>
+    </footer>
   </div>
 </template>
-
-<style scoped>
-.layout {
-  min-height: 100vh;
-  max-width: 300vh;
-  display: flex;
-  flex-direction: column;
-}
-.page-body {
-  flex: 1;
-  background: linear-gradient(to bottom, #091429 3%, transparent 25%),
-    url("/land.png") center 50% no-repeat,
-    linear-gradient(
-      to bottom,
-      #6fe5ff 30%,
-      #ffeb7a 50% 66%,
-      #6fe5ff 66%,
-      #0b1f48
-    );
-
-  background-size: cover, 100%, cover;
-  background-repeat: no-repeat, no-repeat, no-repeat;
-  min-height: 100vh;
-  font-family: "Inter", Arial, sans-serif;
-}
-</style>

@@ -1,1 +1,0 @@
-Composable đóng vai trò trung gian để UI gọi UseCase.

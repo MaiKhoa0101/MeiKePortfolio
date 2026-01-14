@@ -4,6 +4,11 @@ export default defineNuxtConfig({
   compatibilityDate: "2025-07-15",
   devtools: { enabled: true },
   css: ["@/assets/css/global.css"],
+  modules: [
+    '@nuxtjs/tailwindcss',
+    'nuxt-icon',
+    '@nuxtjs/google-fonts'
+  ],
   app: {
     head: {
       link: [
@@ -22,6 +27,13 @@ export default defineNuxtConfig({
         },
       ],
     },
+  },
+  googleFonts: {
+    families: {
+      // Sử dụng font Inter cho hiện đại
+      'Inter': [400, 500, 600, 700, 800],
+    },
+    display: 'swap'
   },
   runtimeConfig: {
     public: {
