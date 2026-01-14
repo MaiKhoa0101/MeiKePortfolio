@@ -1,0 +1,3 @@
+3. Infrastructure (Implementation – Kết nối bên ngoài)
+Chứa code triển khai Repository → gọi API thật, DB thật.
+Tầng này phụ thuộc vào framework/HTTP… và có thể thay đổi khi BE đổi.

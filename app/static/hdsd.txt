@@ -1,0 +1,4 @@
+Chứa các file tài nguyên được public. 
+Được truy cập thông qua đường dẫn / . 
+Ví dụ muốn lấy file image.img trong thư mục static/image.img 
+thì chỉ cần vào địa chỉ localhost:3000/image.img

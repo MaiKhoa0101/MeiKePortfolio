@@ -1,0 +1,3 @@
+Chứa các component có thể tái sử dụng. 
+Các component này có thể truy cập được trong các pages 
+hoặc các component khác bằng cách dùng import

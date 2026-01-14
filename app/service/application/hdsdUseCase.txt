@@ -1,0 +1,5 @@
+2. Application (Use Case – Quy tắc ứng dụng)
+
+Chứa UseCase: logic thao tác dữ liệu theo yêu cầu business.
+
+Dùng interface từ Domain, không biết chi tiết API/database.

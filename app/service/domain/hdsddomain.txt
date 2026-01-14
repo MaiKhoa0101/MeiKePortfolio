@@ -1,0 +1,5 @@
+1. Domain (Business rules – Thuần logic)
+
+Chứa model (entity) và interface (repository).
+
+Không phụ thuộc framework, API, database.

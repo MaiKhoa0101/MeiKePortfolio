@@ -1,0 +1,23 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Inter", sans-serif;
+  background-color: #f9f1ff;
+}
+/* :global để không bị scoped chặn */
+:global(html, body, #__nuxt) {
+  height: 100%;
+}
+:global(body) {
+  margin: 0; /* chính cái này xóa viền trắng */
+  background: #f5f6fa; /* tùy chọn */
+}
+:global(*),
+:global(*::before),
+:global(*::after) {
+  box-sizing: border-box;
+}
