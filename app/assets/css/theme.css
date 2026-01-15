@@ -1,0 +1,24 @@
+/* assets/css/theme.css */
+:root {
+  /* BẢNG MÀU GỐC */
+  --color-purple-neon: #a855f7;
+  --color-purple-dark: #430081;
+  --color-black-void: #030014; /* Đen vũ trụ */
+  --color-white: #ffffff;
+  --color-gray-soft: #94a3b8;  /* Đã chỉnh lại cho hợp nền đen */
+
+  /* SEMANTIC COLORS */
+  
+  /* 1. Primary: Để màu đơn sắc (Tím Neon) */
+  --primary: var(--color-purple-neon); 
+  --primary-hover: var(--color-purple-dark);
+  --primary-content: var(--color-white);
+
+  /* 2. Background */
+  --background: var(--color-black-void);
+  
+  /* 3. Surface: Màu kính trong suốt pha tím */
+  --surface: #131131;
+  --surface-content: var(--color-white);
+  --surface-muted: var(--color-gray-soft);
+}

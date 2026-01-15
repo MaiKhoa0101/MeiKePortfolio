@@ -1,0 +1,23 @@
+:root {
+  /* ĐỊNH NGHĨA MÀU GỐC (Base Palette) */
+  --color-purple-neon: #a855f7;
+  --color-purple-dark: #581c87;
+  --color-black-void: #030014;
+  --color-purple-deep: #0f0529;
+  --color-glass: #1a103c;
+  --color-white: #ffffff;
+  --color-gray-soft: #94a3b8;
+
+  /* ÁNH XẠ SANG MÀU NGỮ NGHĨA (Semantic Colors) 
+     Giống như bạn gán: val Primary = Purple40 trong Compose
+  */
+  --primary: var(--color-purple-neon);
+  --primary-hover: var(--color-purple-dark);
+  
+  --background: var(--color-black-void);
+  --background-soft: var(--color-purple-deep);
+  
+  --surface: var(--color-glass);
+  --surface-content: var(--color-white);
+  --surface-muted: var(--color-gray-soft);
+}

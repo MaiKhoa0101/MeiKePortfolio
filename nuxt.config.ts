@@ -3,7 +3,7 @@ export default defineNuxtConfig({
   srcDir: "app/",
   compatibilityDate: "2025-07-15",
   devtools: { enabled: true },
-  css: ["@/assets/css/global.css"],
+  css: ['~/assets/css/main.css'],
   modules: [
     '@nuxtjs/tailwindcss',
     'nuxt-icon',

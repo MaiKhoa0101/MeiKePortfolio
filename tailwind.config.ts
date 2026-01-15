@@ -14,36 +14,35 @@ export default <Config>{
   ],
   theme: {
     extend: {
-      colors: {
-        primary: {
-          DEFAULT: '#003780', // Tím Neon
-          hover: '#430081',   
-          content: '#ffffff'
+      primary: {
+            DEFAULT: 'var(--primary)',
+            hover: 'var(--primary-hover)',
         },
         background: {
-          DEFAULT: '#030014', // Đen thẳm
-          soft: '#2a0042',    // Sáng hơn xíu (dùng cho Footer, Section chẵn)
+            DEFAULT: 'var(--background)',
+            soft: 'var(--background-soft)',
         },
         surface: {
-          DEFAULT: '#131131', // Tím than (Card, Modal)
-          content: '#ffffff', // Chữ chính (Trắng tím)
-          muted: '#ebebeb',   // Chữ phụ (Xám xanh)
-        },
-        border: {
-          DEFAULT: 'rgba(255, 255, 255, 0.1)', // Viền kính mờ chung
+            DEFAULT: 'var(--surface)',
+            content: 'var(--surface-content)',
+            muted: 'var(--surface-muted)',
         }
       },
       animation: {
-        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
         'float': 'float 6s ease-in-out infinite',
+        'spin-slow': 'spin 12s linear infinite', // Xoay chậm cho hành tinh
+        'pulse-glow': 'pulse-glow 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
       },
       keyframes: {
         float: {
           '0%, 100%': { transform: 'translateY(0)' },
-          '50%': { transform: 'translateY(-20px)' },
+          '50%': { transform: 'translateY(-10px)' },
+        },
+        'pulse-glow': {
+          '0%, 100%': { opacity: '1', filter: 'brightness(1)' },
+          '50%': { opacity: '0.8', filter: 'brightness(1.5)' },
         }
       }
     },
-  },
-  plugins: [],
+  plugins: []
 }

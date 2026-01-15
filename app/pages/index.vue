@@ -143,14 +143,13 @@ const toggleProfile = () => {
               </p>
               
               <div class="animate-fade-in-up delay-300 flex gap-4">
-                <NuxtLink :to="`/project/${project.id}`" class="group relative px-8 py-4 bg-white text-black font-bold rounded-full overflow-hidden">
+                <NuxtLink :to="`/project/${project.id}`" class="group relative px-8 py-4 bg-white text-black font-bold rounded-full overflow-hidden animate-pulse">
                   <span class="relative z-10 group-hover:text-white transition-colors duration-300 flex items-center gap-2">
                     Xem Chi Tiết <Icon name="heroicons:arrow-right" class="w-5 h-5" />
                   </span>
                   <div class="absolute inset-0 bg-primary translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out"></div>
                 </NuxtLink>
               </div>
-
             </div>
           </div>
         </SwiperSlide>
@@ -166,7 +165,7 @@ const toggleProfile = () => {
       
       <div class="container mx-auto px-6 text-center relative z-10">
          <h2 class="text-3xl md:text-5xl font-bold text-white mb-8">
-           Không chỉ là Code, đó là <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-blue-500">Nghệ thuật</span>
+           Không chỉ là Code, đó là <span class="text-primary bg-clip-text bg-gradient-to-r from-primary to-blue-500">Nghệ thuật</span>
          </h2>
          <p class="text-surface-muted max-w-3xl mx-auto text-xl leading-relaxed font-light">
            Ngoài những dự án lớn phía trên, mình còn dành thời gian nghiên cứu các công nghệ mới và xây dựng các tiện ích nhỏ trong vũ trụ công nghệ bao la này.
