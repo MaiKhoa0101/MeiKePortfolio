@@ -1,16 +1,16 @@
 <script setup>
 import { Navigation, Pagination, Autoplay, EffectFade, A11y } from 'swiper/modules'
+import { ref, onMounted } from 'vue'
 
-// 1. LẤY DỮ LIỆU
+// Data
 const { projects } = usePortfolioData()
-
 const featuredProjects = projects.filter(p => p.isFeatured)
 const otherProjects = projects.filter(p => !p.isFeatured && p.category !== 'Thành tựu')
 const achievements = projects.filter(p => p.category === 'Thành tựu')
 
 const swiperModules = [Navigation, Pagination, Autoplay, EffectFade, A11y]
 
-// 2. QUẢN LÝ TRẠNG THÁI PROFILE
+// Profile Modal
 const isProfileOpen = ref(false)
 
 const toggleProfile = () => {
@@ -19,87 +19,155 @@ const toggleProfile = () => {
     document.body.style.overflow = isProfileOpen.value ? 'hidden' : 'auto'
   }
 }
+
+// Starfield effect
+onMounted(() => {
+  if (process.client) {
+    createStarfield()
+  }
+})
+
+const createStarfield = () => {
+  const starfield = document.getElementById('starfield')
+  if (!starfield) return
+  
+  for (let i = 0; i < 100; i++) {
+    const star = document.createElement('div')
+    star.className = 'star'
+    star.style.left = `${Math.random() * 100}%`
+    star.style.top = `${Math.random() * 100}%`
+    star.style.animationDelay = `${Math.random() * 3}s`
+    star.style.animationDuration = `${2 + Math.random() * 3}s`
+    starfield.appendChild(star)
+  }
+}
 </script>
 
 <template>
-  <div class="bg-background min-h-screen">
+  <div class="bg-background min-h-screen relative overflow-x-hidden">
+    
+    <!-- Starfield Background -->
+    <div id="starfield" class="fixed inset-0 z-0 pointer-events-none"></div>
 
+    <!-- Floating Profile Button & Modal -->
     <div class="fixed z-[999] inset-0 pointer-events-none flex items-end justify-end p-6 md:p-10">
 
-      <div v-if="isProfileOpen"
-        class="fixed inset-0 bg-background/90 backdrop-blur-md transition-opacity duration-500 pointer-events-auto"
-        @click="toggleProfile"></div>
+      <!-- Backdrop -->
+      <Transition
+        enter-active-class="transition-opacity duration-500"
+        enter-from-class="opacity-0"
+        enter-to-class="opacity-100"
+        leave-active-class="transition-opacity duration-300"
+        leave-from-class="opacity-100"
+        leave-to-class="opacity-0"
+      >
+        <div v-if="isProfileOpen"
+          class="fixed inset-0 bg-background/95 backdrop-blur-2xl pointer-events-auto"
+          @click="toggleProfile"></div>
+      </Transition>
 
-      <div class="relative transition-all duration-700 cubic-bezier(0.34, 1.56, 0.64, 1) pointer-events-auto"
-        :class="isProfileOpen ? 'w-full h-full md:w-[900px] md:h-[600px] mx-auto my-auto inset-0 absolute flex items-center justify-center' : 'w-16 h-16 md:w-20 md:h-20'">
+      <!-- Profile Container -->
+      <div class="relative transition-all duration-700 ease-out pointer-events-auto"
+        :class="isProfileOpen 
+          ? 'w-full h-full md:w-[900px] md:h-[600px] mx-auto my-auto inset-0 absolute flex items-center justify-center' 
+          : 'w-20 h-20 md:w-24 md:h-24'">
+        
         <div @click="!isProfileOpen ? toggleProfile() : null"
-          class="w-full h-full bg-surface/90 backdrop-blur-2xl border border-border shadow-2xl overflow-hidden transition-all duration-500"
-          :class="isProfileOpen ? 'rounded-3xl shadow-[0_0_100px_rgba(168,85,247,0.2)]' : 'rounded-full hover:scale-110 cursor-pointer animate-float hover:bg-primary shadow-[0_0_30px_rgba(168,85,247,0.5)]'">
+          class="w-full h-full bg-surface/80 backdrop-blur-2xl border overflow-hidden transition-all duration-700"
+          :class="isProfileOpen 
+            ? 'rounded-3xl shadow-[0_0_100px_rgba(168,85,247,0.3)] border-primary/40' 
+            : 'rounded-full hover:scale-110 cursor-pointer animate-float border-primary/60 shadow-[0_0_40px_rgba(168,85,247,0.6)] hover:shadow-[0_0_60px_rgba(168,85,247,0.8)]'">
 
+          <!-- Closed State: Avatar -->
           <div v-if="!isProfileOpen" class="w-full h-full flex items-center justify-center relative group">
-            <img src="https://placehold.co/100x100/1e1b4b/white?text=Me"
-              class="w-full h-full object-cover opacity-90 group-hover:opacity-100" />
+            <img src="https://placehold.co/200x200/1e1b4b/a855f7?text=👨‍💻"
+              class="w-full h-full object-cover opacity-90 group-hover:opacity-100 transition-opacity" />
+            <div class="absolute inset-0 bg-gradient-to-t from-primary/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
           </div>
 
+          <!-- Open State: Full Profile -->
           <div v-else class="w-full h-full flex flex-col md:flex-row relative">
+            <!-- Close Button -->
             <button @click.stop="toggleProfile"
-              class="absolute top-5 right-5 z-20 p-2 bg-white/5 hover:bg-red-500/80 text-white rounded-full transition-colors backdrop-blur-md">
-              <Icon name="heroicons:x-mark" size="24" />
+              class="absolute top-5 right-5 z-20 p-3 bg-white/5 hover:bg-red-500/80 text-white rounded-xl transition-all backdrop-blur-md border border-white/10 hover:border-red-500 hover:rotate-90 duration-300 group">
+              <Icon name="heroicons:x-mark" size="20" class="group-hover:scale-110 transition-transform" />
             </button>
 
-            <div class="md:w-5/12 h-64 md:h-full relative">
-              <img src="https://placehold.co/600x800/1e1b4b/white?text=Profile"
-                class="absolute inset-0 w-full h-full object-cover" />
-              <div class="absolute inset-0 bg-gradient-to-t from-surface via-transparent to-transparent"></div>
-              <div class="absolute bottom-8 left-8">
-                <h3 class="text-3xl font-bold text-white mb-1">Nguyễn Văn A</h3>
-                <p class="text-primary font-medium tracking-wider text-sm uppercase">Fullstack Developer</p>
+            <!-- Left Side: Image -->
+            <div class="md:w-5/12 h-64 md:h-full relative overflow-hidden">
+              <img src="https://placehold.co/600x800/0a0118/a855f7?text=Profile+Photo"
+                class="absolute inset-0 w-full h-full object-cover scale-110 hover:scale-100 transition-transform duration-700" />
+              
+              <!-- Gradient Overlays -->
+              <div class="absolute inset-0 bg-gradient-to-t from-background via-background/50 to-transparent"></div>
+              <div class="absolute inset-0 bg-gradient-to-r from-transparent to-background/30"></div>
+              
+              <!-- Info on Image -->
+              <div class="absolute bottom-8 left-8 right-8">
+                <h3 class="text-4xl font-black text-white mb-2 neon-text">Nguyễn Văn A</h3>
+                <p class="text-primary font-bold tracking-wider text-sm uppercase flex items-center gap-2">
+                  <span class="w-2 h-2 bg-primary rounded-full animate-pulse"></span>
+                  Fullstack Developer
+                </p>
               </div>
             </div>
 
+            <!-- Right Side: Content -->
             <div class="md:w-7/12 p-8 md:p-12 overflow-y-auto custom-scrollbar">
-              <h2
-                class="text-3xl font-bold mb-6 bg-gradient-to-r from-white to-primary/50 bg-clip-text text-transparent">
-                Về bản thân
-              </h2>
-              <p class="text-surface-content/80 mb-8 leading-loose text-lg font-light">
-                Tôi là một lập trình viên đam mê tạo ra các sản phẩm web có tính tương tác cao. Tôi tin rằng một website
-                tốt không chỉ chạy đúng logic mà còn phải mang lại cảm xúc cho người dùng.
-              </p>
+              <div class="space-y-8">
+                
+                <!-- About Section -->
+                <div class="space-y-4">
+                  <h2 class="text-3xl font-black bg-gradient-to-r from-white via-primary to-blue-400 bg-clip-text text-transparent flex items-center gap-3">
+                    <Icon name="heroicons:user-circle" class="text-primary" />
+                    Về bản thân
+                  </h2>
+                  <p class="text-surface-content/80 leading-relaxed text-lg">
+                    Tôi là một lập trình viên đam mê tạo ra các sản phẩm web có tính tương tác cao. 
+                    Tôi tin rằng một website tốt không chỉ chạy đúng logic mà còn phải mang lại 
+                    <span class="text-primary font-semibold">trải nghiệm tuyệt vời</span> cho người dùng.
+                  </p>
+                </div>
 
-              <h3 class="font-bold text-white mb-4 flex items-center gap-2 text-sm uppercase tracking-wider">
-                <Icon name="heroicons:cpu-chip" class="text-primary" /> Kỹ năng chính
-              </h3>
-              <div class="flex flex-wrap gap-2 mb-10">
-                <span v-for="skill in ['Vue/Nuxt', 'NodeJS', 'Tailwind', 'UI/UX', 'Figma']" :key="skill"
-                  class="px-4 py-2 bg-white/5 border border-white/10 text-white rounded-xl text-sm hover:border-primary/50 transition-colors cursor-default">
-                  {{ skill }}
-                </span>
-              </div>
+                <!-- Skills Section -->
+                <div class="space-y-4">
+                  <h3 class="font-bold text-white flex items-center gap-2 text-sm uppercase tracking-wider">
+                    <Icon name="heroicons:cpu-chip" class="text-primary" size="20" /> 
+                    Kỹ năng chính
+                  </h3>
+                  <div class="flex flex-wrap gap-3">
+                    <span v-for="skill in ['Vue/Nuxt', 'NodeJS', 'Tailwind', 'UI/UX', 'Figma', 'TypeScript']" :key="skill"
+                      class="group px-5 py-2.5 bg-gradient-to-r from-surface to-surface/50 border border-primary/20 text-white rounded-xl text-sm hover:border-primary hover:shadow-glow-sm transition-all duration-300 hover:-translate-y-1 cursor-default">
+                      {{ skill }}
+                    </span>
+                  </div>
+                </div>
 
-              <div class="grid grid-cols-2 gap-4">
-                <a href="#" target="_blank"
-                  class="group flex items-center gap-4 p-4 bg-background border border-border rounded-2xl hover:border-primary/50 transition-all hover:-translate-y-1">
-                  <div
-                    class="p-3 bg-white/5 rounded-full group-hover:bg-primary group-hover:text-white transition-colors text-surface-muted">
-                    <Icon name="uil:github" size="24" />
-                  </div>
-                  <div>
-                    <div class="font-bold text-white">Github</div>
-                    <div class="text-xs text-surface-muted">Xem mã nguồn</div>
-                  </div>
-                </a>
-                <a href="#"
-                  class="group flex items-center gap-4 p-4 bg-background border border-border rounded-2xl hover:border-primary/50 transition-all hover:-translate-y-1">
-                  <div
-                    class="p-3 bg-white/5 rounded-full group-hover:bg-primary group-hover:text-white transition-colors text-surface-muted">
-                    <Icon name="uil:envelope" size="24" />
-                  </div>
-                  <div>
-                    <div class="font-bold text-white">Email</div>
-                    <div class="text-xs text-surface-muted">Liên hệ ngay</div>
-                  </div>
-                </a>
+                <!-- Social Links -->
+                <div class="grid grid-cols-2 gap-4">
+                  <a href="https://github.com" target="_blank"
+                    class="group flex items-center gap-4 p-5 bg-gradient-to-br from-background to-background-soft border border-border rounded-2xl hover:border-primary/50 transition-all hover:-translate-y-2 hover:shadow-glow-sm">
+                    <div class="p-3 bg-white/5 rounded-xl group-hover:bg-primary group-hover:scale-110 transition-all text-surface-muted group-hover:text-white">
+                      <Icon name="uil:github" size="24" />
+                    </div>
+                    <div>
+                      <div class="font-bold text-white group-hover:text-primary transition-colors">Github</div>
+                      <div class="text-xs text-surface-muted">Xem mã nguồn</div>
+                    </div>
+                  </a>
+                  
+                  <a href="mailto:hello@example.com"
+                    class="group flex items-center gap-4 p-5 bg-gradient-to-br from-background to-background-soft border border-border rounded-2xl hover:border-primary/50 transition-all hover:-translate-y-2 hover:shadow-glow-sm">
+                    <div class="p-3 bg-white/5 rounded-xl group-hover:bg-primary group-hover:scale-110 transition-all text-surface-muted group-hover:text-white">
+                      <Icon name="uil:envelope" size="24" />
+                    </div>
+                    <div>
+                      <div class="font-bold text-white group-hover:text-primary transition-colors">Email</div>
+                      <div class="text-xs text-surface-muted">Liên hệ ngay</div>
+                    </div>
+                  </a>
+                </div>
+
               </div>
             </div>
           </div>
@@ -108,54 +176,80 @@ const toggleProfile = () => {
       </div>
     </div>
 
-
+    <!-- Hero Section with Swiper -->
     <section class="h-screen relative overflow-hidden">
-      <Swiper :modules="swiperModules" :slides-per-view="1" :loop="true" :effect="'fade'"
-        :fade-effect="{ crossFade: true }" :autoplay="{ delay: 5000, disableOnInteraction: false }"
-        :pagination="{ clickable: true }" :grab-cursor="true" class="h-full w-full">
+      <!-- Background Grid -->
+      <div class="absolute inset-0 cosmic-grid opacity-20"></div>
+
+      <Swiper 
+        :modules="swiperModules" 
+        :slides-per-view="1" 
+        :loop="true" 
+        :effect="'fade'"
+        :fade-effect="{ crossFade: true }" 
+        :autoplay="{ delay: 5000, disableOnInteraction: false }"
+        :pagination="{ clickable: true, dynamicBullets: true }" 
+        :grab-cursor="true" 
+        class="h-full w-full">
+        
         <SwiperSlide v-for="project in featuredProjects" :key="project.id"
           class="relative bg-background overflow-hidden">
 
-          <div class="absolute inset-0 w-full h-full md:w-[85%] ml-auto">
-            <img :src="project.image" class="w-full h-full object-cover object-center md:object-left opacity-90" />
+          <!-- Image -->
+          <div class="absolute inset-0 w-full h-full md:w-[80%] ml-auto">
+            <img :src="project.image" 
+              class="w-full h-full object-cover object-center md:object-left opacity-70 hover:opacity-90 transition-opacity duration-700 hover:scale-105" />
+            
+            <!-- Vignette Effect -->
+            <div class="absolute inset-0 bg-radial-gradient from-transparent via-transparent to-background"></div>
           </div>
 
-          <div class="absolute inset-0 bg-gradient-to-r from-background via-background/95 via-40% to-transparent z-0">
-          </div>
+          <!-- Gradients -->
+          <div class="absolute inset-0 bg-gradient-to-r from-background via-background/95 via-40% to-transparent"></div>
+          <div class="absolute inset-0 bg-gradient-to-t from-background via-background/30 to-transparent md:hidden"></div>
 
-          <div class="absolute inset-0 bg-gradient-to-t from-background via-background/60 to-transparent md:hidden z-0">
-          </div>
-
+          <!-- Content -->
           <div class="relative z-10 container mx-auto px-6 h-full flex items-center">
             <div class="max-w-3xl pt-24 md:pt-0">
 
-              <div
-                class="inline-flex items-center gap-2 py-1.5 px-4 rounded-full bg-primary/10 border border-primary/30 backdrop-blur-md mb-6 animate-fade-in-up">
-                <span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+              <!-- Badge -->
+              <div class="inline-flex items-center gap-3 py-2 px-5 rounded-full bg-primary/10 border border-primary/40 backdrop-blur-xl mb-8 animate-fade-in-up hover:bg-primary/20 transition-all duration-300 group cursor-default">
+                <span class="relative flex h-3 w-3">
+                  <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+                  <span class="relative inline-flex rounded-full h-3 w-3 bg-primary"></span>
+                </span>
                 <span class="text-primary text-xs font-bold tracking-widest uppercase">Featured Project</span>
+                <Icon name="heroicons:star-solid" size="14" class="text-primary group-hover:rotate-180 transition-transform duration-500" />
               </div>
 
-              <h2
-                class="text-4xl md:text-6xl lg:text-7xl font-black text-white mb-6 leading-[1.1] animate-fade-in-up delay-100 tracking-tight drop-shadow-lg">
-                {{ project.title }}
+              <!-- Title -->
+              <h2 class="text-5xl md:text-7xl lg:text-8xl font-black text-white mb-6 leading-[1] animate-fade-in-up delay-100 tracking-tighter">
+                <span class="bg-gradient-to-r from-white via-primary to-blue-400 bg-clip-text text-transparent hover:from-primary hover:to-pink-400 transition-all duration-500">
+                  {{ project.title }}
+                </span>
               </h2>
 
-              <p
-                class="text-lg md:text-xl text-surface-muted mb-10 leading-relaxed animate-fade-in-up delay-200 font-light max-w-xl">
+              <!-- Description -->
+              <p class="text-xl md:text-2xl text-surface-muted mb-12 leading-relaxed animate-fade-in-up delay-200 max-w-2xl">
                 {{ project.description }}
               </p>
 
-              <div class="animate-fade-in-up delay-300 flex gap-4">
+              <!-- CTA Button -->
+              <div class="animate-fade-in-up delay-300">
                 <NuxtLink :to="`/project/${project.id}`"
-                  class="group relative px-8 py-4 bg-white text-black font-bold rounded-full overflow-hidden shadow-[0_0_20px_rgba(255,255,255,0.3)] hover:shadow-[0_0_30px_rgba(168,85,247,0.6)] transition-shadow">
-                  <span
-                    class="relative z-10 group-hover:text-white transition-colors duration-300 flex items-center gap-2">
-                    Xem Chi Tiết
-                    <Icon name="heroicons:arrow-right" class="w-5 h-5" />
+                  class="group relative inline-flex items-center gap-3 px-10 py-5 bg-white text-black font-bold rounded-2xl overflow-hidden shadow-[0_0_30px_rgba(255,255,255,0.3)] hover:shadow-[0_0_50px_rgba(168,85,247,0.6)] transition-all duration-500 hover:scale-105">
+                  
+                  <span class="relative z-10 group-hover:text-white transition-colors duration-300">
+                    Khám Phá Ngay
                   </span>
-                  <div
-                    class="absolute inset-0 bg-primary translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out">
-                  </div>
+                  
+                  <Icon name="heroicons:arrow-right" class="w-6 h-6 relative z-10 group-hover:translate-x-2 group-hover:text-white transition-all duration-300" />
+                  
+                  <!-- Animated Background -->
+                  <div class="absolute inset-0 bg-gradient-to-r from-primary via-purple-600 to-blue-500 translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out"></div>
+                  
+                  <!-- Shine Effect -->
+                  <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent translate-x-[-200%] group-hover:translate-x-[200%] transition-transform duration-1000 skew-x-12"></div>
                 </NuxtLink>
               </div>
 
@@ -164,93 +258,154 @@ const toggleProfile = () => {
         </SwiperSlide>
       </Swiper>
 
-      <div class="absolute bottom-10 left-1/2 -translate-x-1/2 z-20 animate-bounce text-surface-muted/50">
-        <Icon name="heroicons:chevron-double-down" size="32" />
+      <!-- Scroll Indicator -->
+      <div class="absolute bottom-10 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-2 animate-bounce">
+        <span class="text-surface-muted/60 text-xs font-semibold uppercase tracking-wider">Cuộn xuống</span>
+        <Icon name="heroicons:chevron-double-down" size="32" class="text-primary" />
       </div>
     </section>
 
-    <section id="intro" class="py-32 bg-background-soft border-b border-border relative overflow-hidden">
-      <div
-        class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/5 rounded-full blur-[120px]">
-      </div>
+    <!-- Intro Section -->
+    <section id="intro" class="py-32 bg-background-soft border-y border-border relative overflow-hidden">
+      <!-- Decorative Elements -->
+      <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-primary/5 rounded-full blur-[150px] pointer-events-none"></div>
+      <div class="absolute top-20 right-20 w-2 h-2 bg-primary rounded-full animate-pulse"></div>
+      <div class="absolute bottom-20 left-20 w-1 h-1 bg-blue-400 rounded-full animate-pulse" style="animation-delay: 1s;"></div>
 
       <div class="container mx-auto px-6 text-center relative z-10">
-        <h2 class="text-3xl md:text-5xl font-bold text-white mb-8">
-          Không chỉ là Code, đó là <span
-            class="text-primary bg-clip-text bg-gradient-to-r from-primary to-blue-500">Nghệ thuật</span>
+        <h2 class="text-4xl md:text-6xl font-black text-white mb-8 leading-tight">
+          Không chỉ là Code, <br/>
+          <span class="bg-gradient-to-r from-primary via-purple-400 to-blue-400 bg-clip-text text-transparent inline-block animate-fade-in-up delay-100">
+            đó là Nghệ thuật
+          </span>
         </h2>
-        <p class="text-surface-muted max-w-3xl mx-auto text-xl leading-relaxed font-light">
-          Ngoài những dự án lớn phía trên, mình còn dành thời gian nghiên cứu các công nghệ mới và xây dựng các tiện ích
-          nhỏ trong vũ trụ công nghệ bao la này.
+        
+        <p class="text-surface-muted max-w-3xl mx-auto text-xl leading-relaxed animate-fade-in-up delay-200">
+          Ngoài những dự án lớn, tôi dành thời gian nghiên cứu công nghệ mới và xây dựng 
+          các tiện ích sáng tạo trong vũ trụ công nghệ bao la.
         </p>
+
+        <!-- Stats -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mt-16 max-w-4xl mx-auto">
+          <div v-for="stat in [
+            { label: 'Dự án', value: '20+' },
+            { label: 'Khách hàng', value: '15+' },
+            { label: 'Năm kinh nghiệm', value: '3+' },
+            { label: 'Giải thưởng', value: '5+' }
+          ]" :key="stat.label"
+            class="p-6 bg-surface/30 backdrop-blur-xl rounded-2xl border border-border hover:border-primary/50 transition-all duration-300 hover:-translate-y-2 group">
+            <div class="text-4xl font-black text-primary mb-2 group-hover:scale-110 transition-transform">{{ stat.value }}</div>
+            <div class="text-surface-muted text-sm font-medium uppercase tracking-wider">{{ stat.label }}</div>
+          </div>
+        </div>
       </div>
     </section>
 
-    <section id="apps" class="py-32 bg-background relative">
-      <div class="container mx-auto px-6">
-        <div class="flex items-center justify-between mb-16">
+    <!-- Projects Grid Section -->
+    <section id="apps" class="py-32 bg-background relative overflow-hidden">
+      <!-- Background Pattern -->
+      <div class="absolute inset-0 cosmic-grid opacity-10"></div>
+      <div class="absolute top-0 right-0 w-[600px] h-[600px] bg-blue-500/5 rounded-full blur-[150px]"></div>
+
+      <div class="container mx-auto px-6 relative z-10">
+        <div class="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
           <div>
-            <h2 class="text-3xl font-bold text-white flex items-center gap-3">
-              <Icon name="heroicons:squares-2x2" class="text-primary" />
+            <h2 class="text-4xl md:text-5xl font-black text-white flex items-center gap-4 mb-3">
+              <div class="p-3 bg-primary/10 rounded-2xl">
+                <Icon name="heroicons:squares-2x2" class="text-primary" size="32" />
+              </div>
               Ứng dụng & Mini Projects
             </h2>
-            <p class="text-surface-muted mt-2">Các dự án nhỏ để rèn luyện kỹ năng</p>
+            <p class="text-surface-muted text-lg">Các dự án nhỏ để rèn luyện kỹ năng và khám phá công nghệ mới</p>
           </div>
+          
+          <NuxtLink to="/projects" 
+            class="group flex items-center gap-2 px-6 py-3 bg-surface/40 border border-border hover:border-primary/50 rounded-xl transition-all hover:-translate-y-1 text-white font-semibold">
+            Xem tất cả
+            <Icon name="heroicons:arrow-right" class="group-hover:translate-x-1 transition-transform" />
+          </NuxtLink>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           <NuxtLink v-for="p in otherProjects" :key="p.id" :to="`/project/${p.id}`"
-            class="group bg-surface/40 backdrop-blur-sm border border-border rounded-3xl overflow-hidden hover:border-primary/50 transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_10px_40px_-10px_rgba(168,85,247,0.2)]">
-            <div class="h-56 overflow-hidden relative">
+            class="group bg-surface/30 backdrop-blur-xl border border-border rounded-3xl overflow-hidden hover:border-primary/60 transition-all duration-500 hover:-translate-y-3 hover:shadow-[0_20px_60px_-10px_rgba(168,85,247,0.3)]">
+            
+            <!-- Image -->
+            <div class="h-64 overflow-hidden relative">
               <img :src="p.image"
-                class="w-full h-full object-cover group-hover:scale-110 transition duration-700 ease-out opacity-80 group-hover:opacity-100" />
-              <div class="absolute inset-0 bg-background/40 group-hover:bg-transparent transition duration-500"></div>
-            </div>
-            <div class="p-8">
-              <div class="flex justify-between items-center mb-4">
-                <span
-                  class="text-xs font-bold text-primary px-3 py-1 bg-primary/10 rounded-lg uppercase tracking-wider">{{
-                  p.category }}</span>
-                <Icon name="heroicons:arrow-up-right"
-                  class="text-surface-muted group-hover:text-primary transition-colors" />
+                class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out" />
+              
+              <!-- Overlay -->
+              <div class="absolute inset-0 bg-gradient-to-t from-background via-background/50 to-transparent opacity-60 group-hover:opacity-30 transition-opacity"></div>
+              
+              <!-- Hover Icon -->
+              <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-16 h-16 bg-primary rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 scale-0 group-hover:scale-100 transition-all duration-300 shadow-glow-lg">
+                <Icon name="heroicons:arrow-right" size="28" class="text-white" />
               </div>
-              <h3 class="text-2xl font-bold text-white mb-3 group-hover:text-primary transition-colors">{{ p.title }}
+            </div>
+
+            <!-- Content -->
+            <div class="p-8 space-y-4">
+              <div class="flex justify-between items-center">
+                <span class="text-xs font-bold text-primary px-4 py-1.5 bg-primary/10 rounded-lg uppercase tracking-wider border border-primary/20">
+                  {{ p.category }}
+                </span>
+                <Icon name="heroicons:arrow-up-right"
+                  class="text-surface-muted group-hover:text-primary group-hover:rotate-45 transition-all duration-300" size="20" />
+              </div>
+              
+              <h3 class="text-2xl font-bold text-white group-hover:text-primary transition-colors leading-tight">
+                {{ p.title }}
               </h3>
-              <p class="text-surface-muted text-sm line-clamp-2 leading-relaxed">{{ p.description }}</p>
+              
+              <p class="text-surface-muted text-sm line-clamp-2 leading-relaxed">
+                {{ p.description }}
+              </p>
             </div>
           </NuxtLink>
         </div>
       </div>
     </section>
 
-    <section class="py-32 bg-background-soft relative overflow-hidden">
-      <div class="absolute top-0 right-0 w-96 h-96 bg-primary/10 rounded-full blur-[150px] pointer-events-none"></div>
+    <!-- Achievements Section -->
+    <section class="py-32 bg-background-soft relative overflow-hidden border-t border-border">
+      <!-- Decorative -->
+      <div class="absolute top-0 right-0 w-[600px] h-[600px] bg-primary/5 rounded-full blur-[150px]"></div>
+      <div class="absolute bottom-0 left-0 w-[400px] h-[400px] bg-blue-500/5 rounded-full blur-[150px]"></div>
 
       <div class="container mx-auto px-6 relative z-10">
-        <h2 class="text-3xl font-bold text-white mb-12 flex items-center gap-3">
-          <Icon name="heroicons:academic-cap" class="text-primary" />
-          Thành tựu & Chứng chỉ
-        </h2>
+        <div class="text-center mb-16">
+          <h2 class="text-4xl md:text-5xl font-black text-white mb-4 flex items-center justify-center gap-4">
+            <div class="p-3 bg-primary/10 rounded-2xl">
+              <Icon name="heroicons:trophy" class="text-primary" size="32" />
+            </div>
+            Thành tựu & Chứng chỉ
+          </h2>
+          <p class="text-surface-muted text-lg">Những cột mốc đáng nhớ trong hành trình phát triển</p>
+        </div>
 
         <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
           <NuxtLink v-for="item in achievements" :key="item.id" :to="`/project/${item.id}`"
-            class="group relative rounded-2xl overflow-hidden aspect-[4/3] border border-border hover:border-primary/60 transition-all duration-500 cursor-pointer shadow-lg hover:shadow-primary/20">
+            class="group relative rounded-2xl overflow-hidden aspect-square border border-border hover:border-primary/60 transition-all duration-500 shadow-lg hover:shadow-[0_20px_60px_-10px_rgba(168,85,247,0.4)] hover:-translate-y-2">
+            
+            <!-- Image -->
             <img :src="item.image"
-              class="w-full h-full object-cover opacity-60 group-hover:opacity-100 transition duration-500 grayscale group-hover:grayscale-0" />
+              class="w-full h-full object-cover opacity-50 group-hover:opacity-100 transition-all duration-500 grayscale group-hover:grayscale-0 group-hover:scale-110" />
 
-            <div
-              class="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent opacity-80 group-hover:opacity-40 transition-opacity">
-            </div>
+            <!-- Gradient Overlay -->
+            <div class="absolute inset-0 bg-gradient-to-t from-background via-background/70 to-transparent group-hover:from-background/50 transition-all duration-500"></div>
 
-            <div
-              class="absolute inset-0 flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition duration-300 p-4 text-center z-10">
-              <div
-                class="w-12 h-12 bg-primary rounded-full flex items-center justify-center text-white mb-2 shadow-lg scale-0 group-hover:scale-100 transition-transform duration-300 delay-100">
-                <Icon name="heroicons:eye" />
+            <!-- Content -->
+            <div class="absolute inset-0 flex flex-col items-center justify-center p-6 text-center">
+              <!-- Icon -->
+              <div class="w-16 h-16 bg-primary/20 backdrop-blur-xl rounded-2xl flex items-center justify-center text-primary mb-4 scale-75 group-hover:scale-100 group-hover:bg-primary group-hover:text-white transition-all duration-300 shadow-lg">
+                <Icon name="heroicons:academic-cap" size="32" />
               </div>
-              <h4
-                class="font-bold text-white text-lg translate-y-4 group-hover:translate-y-0 transition duration-300 delay-75">
-                {{ item.title }}</h4>
+              
+              <!-- Title -->
+              <h4 class="font-bold text-white text-lg translate-y-4 group-hover:translate-y-0 opacity-0 group-hover:opacity-100 transition-all duration-300">
+                {{ item.title }}
+              </h4>
             </div>
           </NuxtLink>
         </div>
@@ -261,21 +416,64 @@ const toggleProfile = () => {
 </template>
 
 <style scoped>
-/* Scrollbar tùy chỉnh cho nội dung Modal */
+/* Custom Scrollbar */
 .custom-scrollbar::-webkit-scrollbar {
   width: 6px;
 }
 
 .custom-scrollbar::-webkit-scrollbar-track {
   background: rgba(255, 255, 255, 0.05);
+  border-radius: 10px;
 }
 
 .custom-scrollbar::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.2);
+  background: rgba(168, 85, 247, 0.3);
   border-radius: 10px;
 }
 
 .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-  background: rgba(168, 85, 247, 0.5);
+  background: rgba(168, 85, 247, 0.6);
+}
+
+/* Starfield Animation */
+@keyframes twinkle {
+  0%, 100% { 
+    opacity: 0.2;
+    transform: scale(1);
+  }
+  50% { 
+    opacity: 1;
+    transform: scale(1.5);
+  }
+}
+
+.star {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background: white;
+  border-radius: 50%;
+  animation: twinkle 3s ease-in-out infinite;
+}
+
+/* Swiper Pagination Styling */
+:deep(.swiper-pagination-bullet) {
+  width: 12px;
+  height: 12px;
+  background: rgba(168, 85, 247, 0.3);
+  opacity: 1;
+  transition: all 0.3s;
+}
+
+:deep(.swiper-pagination-bullet-active) {
+  width: 32px;
+  border-radius: 6px;
+  background: linear-gradient(90deg, #a855f7, #3b82f6);
+  box-shadow: 0 0 20px rgba(168, 85, 247, 0.6);
+}
+
+/* Radial Gradient */
+.bg-radial-gradient {
+  background: radial-gradient(circle, var(--tw-gradient-stops));
 }
 </style>
