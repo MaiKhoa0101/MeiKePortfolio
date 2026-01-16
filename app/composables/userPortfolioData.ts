@@ -3,9 +3,9 @@ export const usePortfolioData = () => {
   const projects = [
     {
       id: 'app-ecommerce',
-      title: 'Ứng dụng Thương mại điện tử',
+      title: 'HelloDoc - Ứng dụng diễn đàn sức khỏe - Thiết kế chuyên biệt cho người khiếm khuyết',
       category: 'Ứng dụng',
-      image: 'https://placehold.co/800x600/2563eb/white?text=E-Commerce',
+      image: 'https://camo.githubusercontent.com/5855ce9be10410007aff73a50ff654515ac770ec18a43ad203588e6113a2402a/68747470733a2f2f692e6962622e636f2f6b733750765a42632f53637265656e73686f742d323032352d31322d33302d3231313130302e706e67',
       description: 'Hệ thống bán hàng full-stack với tính năng thanh toán online.',
       techStack: ['Nuxt 3', 'Supabase', 'Stripe'],
       gallery: ['https://placehold.co/800x600', 'https://placehold.co/800x600'],

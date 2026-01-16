@@ -7,7 +7,7 @@
       
       <NuxtLink to="/" class="flex items-center gap-3 group">
         <div class="relative w-10 h-10">
-            <img src="/images/planet.png" alt="Planet" class="w-full h-full object-contain animate-spin-slow drop-shadow-[0_0_15px_rgba(168,85,247,0.5)]" />
+            <img src="" alt="Planet" class="w-full h-full object-contain animate-spin-slow drop-shadow-[0_0_15px_rgba(168,85,247,0.5)]" />
             <div class="absolute inset-0 border border-primary/30 rounded-full animate-ping opacity-20"></div>
         </div>
 
@@ -38,7 +38,7 @@
             <span class="font-bold text-white group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-white group-hover:to-orange-200 transition-all">
                 Liên hệ
             </span>
-            <img src="/images/sun.png" class="w-6 h-6 animate-float group-hover:rotate-12 transition-transform duration-500" />
+            <img src="" class="w-6 h-6 animate-float group-hover:rotate-12 transition-transform duration-500" />
           </div>
         </NuxtLink>
 
