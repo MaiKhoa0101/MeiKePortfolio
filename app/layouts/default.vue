@@ -47,8 +47,8 @@ const scrollToTop = () => {
     </Transition>
 
     <!-- Footer -->
-    <footer class="bg-background-soft border-t border-border relative overflow-hidden">
-      <!-- Decorative Background -->
+    <footer class="bg-background border-t border-primary/10 relative overflow-hidden">
+      <!-- Cosmic atmosphere background -->
       <div class="absolute inset-0 cosmic-grid opacity-5"></div>
       <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-primary/5 rounded-full blur-[150px]"></div>
 
@@ -62,7 +62,7 @@ const scrollToTop = () => {
             <div class="flex items-center gap-3">
               <div class="relative w-12 h-12">
                 <div class="absolute inset-0 border-2 border-primary/30 rounded-full animate-spin-slow"></div>
-                <div class="absolute inset-2 bg-gradient-to-br from-primary to-blue-500 rounded-full shadow-glow-sm"></div>
+                <div class="absolute inset-2 bg-gradient-to-br from-primary to-cosmic-blue rounded-full shadow-glow-sm"></div>
               </div>
               <div>
                 <h3 class="text-2xl font-black bg-gradient-to-r from-white to-primary bg-clip-text text-transparent">
@@ -75,18 +75,18 @@ const scrollToTop = () => {
               Tạo ra những trải nghiệm web độc đáo và đầy cảm hứng từ vũ trụ công nghệ.
             </p>
             
-            <!-- Social Links -->
+            <!-- Social Links - Simplified -->
             <div class="flex gap-3">
-              <a href="#" class="group p-3 bg-surface/40 hover:bg-primary border border-border hover:border-primary rounded-xl transition-all duration-300 hover:-translate-y-1">
+              <a href="#" class="group p-3 bg-white/5 hover:bg-primary border border-white/10 hover:border-primary rounded-xl transition-all hover:-translate-y-1">
                 <Icon name="uil:github" size="20" class="text-surface-muted group-hover:text-white transition-colors" />
               </a>
-              <a href="#" class="group p-3 bg-surface/40 hover:bg-primary border border-border hover:border-primary rounded-xl transition-all duration-300 hover:-translate-y-1">
+              <a href="#" class="group p-3 bg-white/5 hover:bg-primary border border-white/10 hover:border-primary rounded-xl transition-all hover:-translate-y-1">
                 <Icon name="uil:linkedin" size="20" class="text-surface-muted group-hover:text-white transition-colors" />
               </a>
-              <a href="#" class="group p-3 bg-surface/40 hover:bg-primary border border-border hover:border-primary rounded-xl transition-all duration-300 hover:-translate-y-1">
+              <a href="#" class="group p-3 bg-white/5 hover:bg-primary border border-white/10 hover:border-primary rounded-xl transition-all hover:-translate-y-1">
                 <Icon name="uil:twitter" size="20" class="text-surface-muted group-hover:text-white transition-colors" />
               </a>
-              <a href="#" class="group p-3 bg-surface/40 hover:bg-primary border border-border hover:border-primary rounded-xl transition-all duration-300 hover:-translate-y-1">
+              <a href="#" class="group p-3 bg-white/5 hover:bg-primary border border-white/10 hover:border-primary rounded-xl transition-all hover:-translate-y-1">
                 <Icon name="uil:envelope" size="20" class="text-surface-muted group-hover:text-white transition-colors" />
               </a>
             </div>
@@ -107,7 +107,7 @@ const scrollToTop = () => {
                 { name: 'Liên hệ', href: '/contact' }
               ]" :key="link.name">
                 <a :href="link.href" 
-                  class="text-surface-muted hover:text-primary transition-colors duration-300 flex items-center gap-2 group">
+                  class="text-surface-muted hover:text-primary transition-colors flex items-center gap-2 group">
                   <Icon name="heroicons:chevron-right" size="16" class="opacity-0 group-hover:opacity-100 -translate-x-2 group-hover:translate-x-0 transition-all" />
                   {{ link.name }}
                 </a>
@@ -125,16 +125,14 @@ const scrollToTop = () => {
               Đăng ký để nhận thông tin về các dự án và bài viết mới nhất.
             </p>
             <form class="space-y-3">
-              <div class="relative">
-                <input 
-                  type="email" 
-                  placeholder="Email của bạn"
-                  class="w-full px-4 py-3 bg-surface/40 border border-border rounded-xl text-white placeholder-surface-muted focus:outline-none focus:border-primary transition-colors"
-                />
-              </div>
+              <input 
+                type="email" 
+                placeholder="Email của bạn"
+                class="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white placeholder-surface-muted focus:outline-none focus:border-primary transition-colors"
+              />
               <button 
                 type="submit"
-                class="w-full px-6 py-3 bg-gradient-to-r from-primary to-purple-600 text-white font-bold rounded-xl hover:shadow-glow-md transition-all duration-300 hover:scale-105 flex items-center justify-center gap-2"
+                class="w-full px-6 py-3 bg-gradient-to-r from-primary to-purple-600 text-white font-bold rounded-xl hover:shadow-glow-md transition-all hover:scale-105 flex items-center justify-center gap-2"
               >
                 <span>Đăng ký</span>
                 <Icon name="heroicons:paper-airplane" size="18" />
@@ -151,7 +149,7 @@ const scrollToTop = () => {
           <div class="relative z-10 space-y-6">
             <h3 class="text-3xl md:text-5xl font-black text-white">
               Sẵn sàng biến ý tưởng thành 
-              <span class="bg-gradient-to-r from-primary via-purple-400 to-blue-400 bg-clip-text text-transparent">
+              <span class="bg-gradient-to-r from-primary via-purple-400 to-cosmic-blue bg-clip-text text-primary">
                 hiện thực
               </span>
               ?
@@ -167,11 +165,11 @@ const scrollToTop = () => {
                   Bắt đầu dự án
                   <Icon name="heroicons:arrow-right" class="group-hover:translate-x-1 transition-transform" />
                 </span>
-                <div class="absolute inset-0 bg-gradient-to-r from-primary to-blue-500 translate-y-full group-hover:translate-y-0 transition-transform duration-500"></div>
+                <div class="absolute inset-0 bg-gradient-to-r from-primary to-cosmic-blue translate-y-full group-hover:translate-y-0 transition-transform duration-500"></div>
               </NuxtLink>
 
               <a href="mailto:hello@example.com"
-                class="px-10 py-4 bg-surface/40 border border-border hover:border-primary text-white font-bold rounded-2xl transition-all duration-300 hover:-translate-y-1 flex items-center gap-2">
+                class="px-10 py-4 bg-white/5 border border-white/10 hover:border-primary text-white font-bold rounded-2xl transition-all hover:-translate-y-1 flex items-center gap-2">
                 <Icon name="heroicons:envelope" />
                 Email tôi
               </a>
@@ -180,11 +178,11 @@ const scrollToTop = () => {
         </div>
 
         <!-- Bottom Bar -->
-        <div class="pt-8 border-t border-border/50 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-surface-muted">
+        <div class="pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-surface-muted">
           <p>
             © 2024 DevProfile. Thiết kế & phát triển với 
             <span class="text-primary font-semibold">❤️</span> và 
-            <span class="text-blue-400 font-semibold">☕</span>
+            <span class="text-cosmic-blue font-semibold">☕</span>
           </p>
           
           <div class="flex gap-6">
@@ -206,28 +204,5 @@ const scrollToTop = () => {
     linear-gradient(rgba(168, 85, 247, 0.1) 1px, transparent 1px),
     linear-gradient(90deg, rgba(168, 85, 247, 0.1) 1px, transparent 1px);
   background-size: 50px 50px;
-}
-
-/* Shadow Glow */
-.shadow-glow-sm {
-  box-shadow: 0 0 20px rgba(168, 85, 247, 0.3);
-}
-
-.shadow-glow-md {
-  box-shadow: 0 0 30px rgba(168, 85, 247, 0.4);
-}
-
-.shadow-glow-lg {
-  box-shadow: 0 0 40px rgba(168, 85, 247, 0.5);
-}
-
-/* Spin Animation */
-@keyframes spin-slow {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
-
-.animate-spin-slow {
-  animation: spin-slow 20s linear infinite;
 }
 </style>

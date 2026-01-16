@@ -28,38 +28,35 @@ const navItems = [
     class="fixed top-0 left-0 right-0 z-50 transition-all duration-500"
     :class="isScrolled ? 'py-2' : 'py-4'"
   >
-    <!-- Background with glow effect -->
+    <!-- Simplified background -->
     <div 
-      class="absolute inset-0 transition-all duration-500"
+      class="absolute inset-0 backdrop-blur-2xl transition-all duration-500"
       :class="isScrolled 
-        ? 'bg-background/95 backdrop-blur-2xl border-b border-primary/30 shadow-[0_8px_32px_rgba(168,85,247,0.15)]' 
-        : 'bg-background/60 backdrop-blur-xl border-b border-white/5'"
+        ? 'bg-background/95 border-b border-primary/30' 
+        : 'bg-background/60 border-b border-white/5'"
     >
-      <!-- Animated gradient line -->
-      <div class="absolute bottom-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-primary to-transparent opacity-50"></div>
+      <!-- Animated gradient accent -->
+      <div class="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary to-transparent opacity-50"></div>
     </div>
 
     <div class="container mx-auto px-6 relative z-10">
       <div class="flex justify-between items-center h-16">
         
-        <!-- Logo -->
+        <!-- Logo với cosmic orbit effect -->
         <NuxtLink to="/" class="flex items-center gap-3 group">
           <div class="relative w-12 h-12">
-            <!-- Orbiting rings -->
+            <!-- Dual orbiting rings -->
             <div class="absolute inset-0 border-2 border-primary/20 rounded-full animate-spin-slow"></div>
-            <div class="absolute inset-1 border border-primary/40 rounded-full animate-spin-slow" style="animation-duration: 15s; animation-direction: reverse;"></div>
+            <div class="absolute inset-1 border border-primary/40 rounded-full animate-spin-reverse"></div>
             
-            <!-- Planet core -->
-            <div class="absolute inset-2 bg-gradient-to-br from-primary via-purple-500 to-blue-500 rounded-full shadow-glow-md group-hover:shadow-glow-lg transition-shadow duration-300">
+            <!-- Core planet -->
+            <div class="absolute inset-2 bg-gradient-to-br from-primary via-purple-500 to-cosmic-blue rounded-full shadow-glow-sm group-hover:shadow-glow-md transition-shadow">
               <div class="absolute inset-0 bg-gradient-to-tr from-white/20 to-transparent rounded-full"></div>
             </div>
-            
-            <!-- Glow effect -->
-            <div class="absolute inset-0 bg-primary/30 rounded-full blur-xl group-hover:blur-2xl transition-all duration-300 -z-10"></div>
           </div>
 
           <div class="flex flex-col">
-            <span class="text-2xl font-black tracking-tight leading-none bg-gradient-to-r from-white via-primary to-blue-400 bg-clip-text text-transparent group-hover:from-primary group-hover:to-pink-400 transition-all duration-500">
+            <span class="text-2xl font-black tracking-tight leading-none bg-gradient-to-r from-white via-primary to-cosmic-blue bg-clip-text text-transparent group-hover:from-primary group-hover:to-cosmic-pink transition-all duration-500">
               DevProfile
             </span>
             <span class="text-[9px] uppercase tracking-[0.3em] text-surface-muted group-hover:text-primary transition-colors font-semibold">
@@ -74,26 +71,26 @@ const navItems = [
             v-for="item in navItems" 
             :key="item.name" 
             :href="item.href"
-            class="relative px-6 py-2.5 group overflow-hidden rounded-xl transition-all duration-300 hover:bg-white/5"
+            class="relative px-6 py-2.5 group rounded-xl transition-all duration-300 hover:bg-white/5"
           >
             <span class="relative z-10 flex items-center gap-2 text-sm font-medium text-surface-content/80 group-hover:text-white transition-colors">
               <Icon :name="item.icon" size="16" class="opacity-0 group-hover:opacity-100 transition-opacity" />
               {{ item.name }}
             </span>
             
-            <!-- Hover effect -->
+            <!-- Shimmer effect on hover -->
             <span class="absolute inset-0 bg-gradient-to-r from-primary/0 via-primary/10 to-primary/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700"></span>
             
-            <!-- Bottom border -->
-            <span class="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-[2px] bg-gradient-to-r from-transparent via-primary to-transparent group-hover:w-full transition-all duration-500"></span>
+            <!-- Bottom accent -->
+            <span class="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-0.5 bg-gradient-to-r from-transparent via-primary to-transparent group-hover:w-full transition-all duration-500"></span>
           </a>
 
           <!-- CTA Button -->
           <NuxtLink to="/contact" class="ml-4 group relative">
-            <!-- Animated glow -->
-            <div class="absolute -inset-1 bg-gradient-to-r from-primary via-pink-500 to-orange-500 rounded-xl opacity-60 blur-md group-hover:opacity-100 group-hover:blur-lg transition-all duration-500 animate-pulse-glow"></div>
+            <!-- Pulsing glow -->
+            <div class="absolute -inset-1 bg-gradient-to-r from-primary to-purple-600 rounded-xl opacity-60 blur group-hover:opacity-100 group-hover:blur-md transition-all duration-500 animate-pulse-soft"></div>
             
-            <div class="relative flex items-center gap-2 bg-gradient-to-r from-primary to-purple-600 px-6 py-2.5 rounded-xl font-bold text-white shadow-lg hover:shadow-glow-md transition-all duration-300 hover:scale-105">
+            <div class="relative flex items-center gap-2 bg-gradient-to-r from-primary to-purple-600 px-6 py-2.5 rounded-xl font-bold text-white">
               <Icon name="heroicons:paper-airplane" size="18" class="group-hover:rotate-45 transition-transform duration-300" />
               <span>Liên hệ</span>
               
@@ -106,7 +103,7 @@ const navItems = [
         <!-- Mobile Menu Button -->
         <button 
           @click="isMobileMenuOpen = !isMobileMenuOpen"
-          class="md:hidden relative p-2 text-white hover:bg-white/10 rounded-xl transition-all duration-300 border border-white/10 hover:border-primary/50 group"
+          class="md:hidden p-2 text-white hover:bg-white/10 rounded-xl transition-all border border-white/10 hover:border-primary/50 group"
         >
           <Icon 
             :name="isMobileMenuOpen ? 'heroicons:x-mark' : 'heroicons:bars-3'" 
@@ -132,7 +129,7 @@ const navItems = [
             :key="item.name" 
             :href="item.href"
             @click="isMobileMenuOpen = false"
-            class="flex items-center gap-3 px-4 py-3 bg-surface/40 backdrop-blur-xl rounded-xl border border-white/10 hover:border-primary/50 hover:bg-surface/60 transition-all duration-300 group"
+            class="flex items-center gap-3 px-4 py-3 bg-surface/40 backdrop-blur-xl rounded-xl border border-white/10 hover:border-primary/50 hover:bg-surface/60 transition-all group"
           >
             <Icon :name="item.icon" size="20" class="text-primary group-hover:scale-110 transition-transform" />
             <span class="font-medium text-white">{{ item.name }}</span>
@@ -141,7 +138,7 @@ const navItems = [
           <NuxtLink 
             to="/contact"
             @click="isMobileMenuOpen = false"
-            class="flex items-center justify-center gap-2 px-4 py-3 bg-gradient-to-r from-primary to-purple-600 rounded-xl font-bold text-white shadow-glow-sm hover:shadow-glow-md transition-all duration-300"
+            class="flex items-center justify-center gap-2 px-4 py-3 bg-gradient-to-r from-primary to-purple-600 rounded-xl font-bold text-white shadow-glow-sm hover:shadow-glow-md transition-all"
           >
             <Icon name="heroicons:paper-airplane" size="20" />
             <span>Liên hệ ngay</span>
@@ -153,15 +150,25 @@ const navItems = [
 </template>
 
 <style scoped>
-.shadow-glow-sm {
-  box-shadow: 0 0 20px rgba(168, 85, 247, 0.3);
+@keyframes spin-reverse {
+  from { transform: rotate(360deg); }
+  to { transform: rotate(0deg); }
 }
 
-.shadow-glow-md {
-  box-shadow: 0 0 30px rgba(168, 85, 247, 0.4);
+.animate-spin-reverse {
+  animation: spin-reverse 15s linear infinite;
 }
 
-.shadow-glow-lg {
-  box-shadow: 0 0 40px rgba(168, 85, 247, 0.5);
+@keyframes pulse-soft {
+  0%, 100% { 
+    opacity: 0.6;
+  }
+  50% { 
+    opacity: 0.8;
+  }
+}
+
+.animate-pulse-soft {
+  animation: pulse-soft 3s ease-in-out infinite;
 }
 </style>

@@ -2,92 +2,58 @@
   /* ========== COSMIC COLOR PALETTE ========== */
   
   /* Primary Purple Spectrum */
-  --color-purple-neon: #a855f7;      /* Vibrant neon purple */
-  --color-purple-bright: #c084fc;    /* Bright purple */
-  --color-purple-medium: #9333ea;    /* Medium purple */
-  --color-purple-dark: #7c3aed;      /* Dark purple */
-  --color-purple-deep: #6b21a8;      /* Deep purple */
+  --color-purple-neon: #a855f7;
+  --color-purple-bright: #c084fc;
+  --color-purple-deep: #6b21a8;
   
-  /* Accent Colors - Cosmic Palette */
-  --color-blue-electric: #3b82f6;    /* Electric blue */
-  --color-blue-cyan: #06b6d4;        /* Cyan blue */
-  --color-pink-hot: #ec4899;         /* Hot pink */
-  --color-pink-rose: #f43f5e;        /* Rose pink */
-  --color-orange-fire: #f97316;      /* Fire orange */
-  --color-emerald: #10b981;          /* Emerald green */
-  --color-yellow-star: #fbbf24;      /* Star yellow */
+  /* Cosmic Accent Colors */
+  --color-blue-cosmic: #3b82f6;
+  --color-cyan-cosmic: #06b6d4;
+  --color-pink-cosmic: #ec4899;
+  --color-orange-cosmic: #f97316;
   
-  /* Dark Backgrounds - Space Theme */
-  --color-void-black: #000000;       /* Pure black void */
-  --color-space-black: #030014;      /* Space black */
-  --color-deep-purple: #0a0118;      /* Deep purple space */
-  --color-dark-purple: #1a0b2e;      /* Dark purple */
-  --color-midnight: #0f172a;         /* Midnight blue */
+  /* Dark Space Backgrounds */
+  --color-void: #000000;
+  --color-space: #030014;
+  --color-deep-space: #0a0118;
   
-  /* Glass & Surface */
-  --color-glass-purple: #1a103c;     /* Purple glass */
-  --color-glass-dark: rgba(15, 23, 42, 0.8);  /* Dark glass */
-  
-  /* Neutral Colors */
-  --color-white: #ffffff;
-  --color-gray-100: #f1f5f9;
-  --color-gray-300: #cbd5e1;
-  --color-gray-400: #94a3b8;
-  --color-gray-500: #64748b;
-  --color-gray-700: #334155;
-  --color-gray-900: #0f172a;
+  /* Neutral Grays */
+  --color-gray-light: #cbd5e1;
+  --color-gray-medium: #94a3b8;
+  --color-gray-dark: #64748b;
 
-  /* ========== SEMANTIC COLOR MAPPING ========== */
+  /* ========== SEMANTIC TOKENS ========== */
   
   /* Primary */
   --primary: var(--color-purple-neon);
   --primary-hover: var(--color-purple-bright);
   --primary-dark: var(--color-purple-deep);
-  --primary-light: var(--color-purple-bright);
   
-  /* Background Layers */
-  --background: var(--color-space-black);
-  --background-soft: var(--color-deep-purple);
-  --background-elevated: var(--color-dark-purple);
-  --background-void: var(--color-void-black);
+  /* Background */
+  --background: var(--color-space);
+  --background-elevated: var(--color-deep-space);
   
   /* Surface */
-  --surface: var(--color-glass-purple);
-  --surface-content: var(--color-white);
-  --surface-muted: var(--color-gray-400);
-  --surface-dim: var(--color-gray-500);
+  --surface: rgba(26, 16, 60, 0.4);
+  --surface-content: #ffffff;
+  --surface-muted: var(--color-gray-medium);
   
   /* Border */
   --border: rgba(168, 85, 247, 0.2);
-  --border-bright: rgba(168, 85, 247, 0.4);
   --border-subtle: rgba(255, 255, 255, 0.1);
 
   /* ========== GRADIENTS ========== */
   
-  --gradient-cosmic: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  --gradient-purple-blue: linear-gradient(135deg, #a855f7 0%, #3b82f6 100%);
-  --gradient-purple-pink: linear-gradient(135deg, #a855f7 0%, #ec4899 100%);
-  --gradient-blue-cyan: linear-gradient(135deg, #3b82f6 0%, #06b6d4 100%);
-  --gradient-fire: linear-gradient(135deg, #f97316 0%, #ec4899 100%);
-  --gradient-aurora: linear-gradient(135deg, #a855f7 0%, #3b82f6 50%, #10b981 100%);
-  --gradient-sunset: linear-gradient(135deg, #f97316 0%, #ec4899 50%, #a855f7 100%);
-  
-  /* Radial Gradients */
-  --gradient-glow: radial-gradient(circle at center, rgba(168, 85, 247, 0.4), transparent 70%);
-  --gradient-glow-blue: radial-gradient(circle at center, rgba(59, 130, 246, 0.3), transparent 70%);
-  --gradient-glow-pink: radial-gradient(circle at center, rgba(236, 72, 153, 0.3), transparent 70%);
+  --gradient-cosmic: linear-gradient(135deg, var(--color-purple-neon) 0%, var(--color-blue-cosmic) 100%);
+  --gradient-purple-pink: linear-gradient(135deg, var(--color-purple-neon) 0%, var(--color-pink-cosmic) 100%);
+  --gradient-aurora: linear-gradient(135deg, var(--color-purple-neon) 0%, var(--color-blue-cosmic) 50%, var(--color-cyan-cosmic) 100%);
   
   /* ========== SHADOWS & GLOWS ========== */
   
   --shadow-glow-sm: 0 0 20px rgba(168, 85, 247, 0.4);
   --shadow-glow-md: 0 0 40px rgba(168, 85, 247, 0.5);
   --shadow-glow-lg: 0 0 60px rgba(168, 85, 247, 0.6);
-  --shadow-glow-xl: 0 0 80px rgba(168, 85, 247, 0.7);
-  
   --shadow-cosmic: 0 0 50px rgba(168, 85, 247, 0.4), 0 0 100px rgba(59, 130, 246, 0.3);
-  --shadow-blue: 0 0 30px rgba(59, 130, 246, 0.5);
-  --shadow-pink: 0 0 30px rgba(236, 72, 153, 0.5);
-  --shadow-orange: 0 0 30px rgba(249, 115, 22, 0.5);
 }
 
 /* ========== UTILITY CLASSES ========== */
@@ -97,38 +63,21 @@
   text-shadow: 
     0 0 10px rgba(168, 85, 247, 0.8),
     0 0 20px rgba(168, 85, 247, 0.6),
-    0 0 30px rgba(168, 85, 247, 0.4),
-    0 0 40px rgba(168, 85, 247, 0.2);
+    0 0 30px rgba(168, 85, 247, 0.4);
 }
 
 .neon-text-blue {
   text-shadow: 
     0 0 10px rgba(59, 130, 246, 0.8),
-    0 0 20px rgba(59, 130, 246, 0.6),
-    0 0 30px rgba(59, 130, 246, 0.4);
-}
-
-.neon-text-pink {
-  text-shadow: 
-    0 0 10px rgba(236, 72, 153, 0.8),
-    0 0 20px rgba(236, 72, 153, 0.6),
-    0 0 30px rgba(236, 72, 153, 0.4);
+    0 0 20px rgba(59, 130, 246, 0.6);
 }
 
 /* Cosmic Grid Background */
 .cosmic-grid {
   background-image: 
-    linear-gradient(rgba(168, 85, 247, 0.15) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(168, 85, 247, 0.15) 1px, transparent 1px);
-  background-size: 50px 50px;
-  background-position: center center;
-}
-
-.cosmic-grid-dense {
-  background-image: 
     linear-gradient(rgba(168, 85, 247, 0.1) 1px, transparent 1px),
     linear-gradient(90deg, rgba(168, 85, 247, 0.1) 1px, transparent 1px);
-  background-size: 20px 20px;
+  background-size: 50px 50px;
 }
 
 /* Glassmorphism */
@@ -138,42 +87,11 @@
   border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-.glass-effect-strong {
-  background: rgba(26, 16, 60, 0.7);
-  backdrop-filter: blur(30px);
-  border: 1px solid rgba(168, 85, 247, 0.2);
-}
-
-/* Starfield */
-.star {
-  position: absolute;
-  width: 2px;
-  height: 2px;
-  background: white;
-  border-radius: 50%;
-  animation: twinkle 3s ease-in-out infinite;
-  box-shadow: 0 0 3px rgba(255, 255, 255, 0.5);
-}
-
-.star-large {
-  width: 3px;
-  height: 3px;
-  box-shadow: 0 0 6px rgba(168, 85, 247, 0.8);
-}
-
-.star-colored {
-  animation: twinkle-color 4s ease-in-out infinite;
-}
-
 /* ========== ANIMATIONS ========== */
 
 @keyframes float {
-  0%, 100% { 
-    transform: translateY(0px);
-  }
-  50% { 
-    transform: translateY(-15px);
-  }
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-15px); }
 }
 
 @keyframes pulse-glow {
@@ -204,12 +122,8 @@
 }
 
 @keyframes shimmer {
-  0% { 
-    background-position: -1000px 0;
-  }
-  100% { 
-    background-position: 1000px 0;
-  }
+  0% { background-position: -1000px 0; }
+  100% { background-position: 1000px 0; }
 }
 
 @keyframes twinkle {
@@ -223,42 +137,14 @@
   }
 }
 
-@keyframes twinkle-color {
-  0%, 100% { 
-    opacity: 0.4;
-    filter: hue-rotate(0deg);
-  }
-  25% {
-    filter: hue-rotate(90deg);
-  }
-  50% { 
-    opacity: 1;
-    filter: hue-rotate(180deg);
-  }
-  75% {
-    filter: hue-rotate(270deg);
-  }
-}
-
 @keyframes gradient-shift {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
 }
 
 /* Animation Classes */
 .animate-float {
   animation: float 6s ease-in-out infinite;
-}
-
-.animate-float-slow {
-  animation: float 8s ease-in-out infinite;
 }
 
 .animate-pulse-glow {
@@ -267,10 +153,6 @@
 
 .animate-spin-slow {
   animation: spin-slow 20s linear infinite;
-}
-
-.animate-spin-slower {
-  animation: spin-slow 30s linear infinite;
 }
 
 .animate-fade-in-up {
@@ -290,10 +172,8 @@
 .delay-100 { animation-delay: 0.1s; }
 .delay-200 { animation-delay: 0.2s; }
 .delay-300 { animation-delay: 0.3s; }
-.delay-500 { animation-delay: 0.5s; }
-.delay-700 { animation-delay: 0.7s; }
 
-/* ========== RESPONSIVE GLOW EFFECTS ========== */
+/* ========== GLOW EFFECTS ========== */
 
 .glow-hover {
   transition: all 0.3s ease;
@@ -304,21 +184,6 @@
   transform: translateY(-2px);
 }
 
-.glow-purple {
-  box-shadow: 0 0 30px rgba(168, 85, 247, 0.5);
-}
-
-.glow-blue {
-  box-shadow: 0 0 30px rgba(59, 130, 246, 0.5);
-}
-
-.glow-pink {
-  box-shadow: 0 0 30px rgba(236, 72, 153, 0.5);
-}
-
 .glow-cosmic {
-  box-shadow: 
-    0 0 20px rgba(168, 85, 247, 0.4),
-    0 0 40px rgba(59, 130, 246, 0.3),
-    0 0 60px rgba(236, 72, 153, 0.2);
+  box-shadow: var(--shadow-cosmic);
 }
